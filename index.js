@@ -2,7 +2,13 @@ const express = require('express');
 const { Sequelize, DataTypes } = require('sequelize');
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
-    dialect: 'postgres'
+    dialect: 'postgres',
+    dialectOptions:{
+        ssl: {
+            require: true,
+            rejectUnauthorized: false
+        }
+    }
 });
 
 const SensorData = sequelize.define('sensor-data', {
